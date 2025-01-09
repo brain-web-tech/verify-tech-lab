@@ -2,6 +2,7 @@
   "name": "verify-tech-lab",
   "version": "5.3.4",
   "copyright": "verify-tech-lab",
+  "homepage": "https://brain-web-tech.github.io/verify-tech-lab/",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
