@@ -25,7 +25,7 @@ module.exports = function(config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/Verify_Tech_Lab-template'),
+      dir: require('path').join(__dirname, './coverage/verify-tech-lab'),
       subdir: '.',
       reporters: [
         { type: 'html' },

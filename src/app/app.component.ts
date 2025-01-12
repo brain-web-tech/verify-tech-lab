@@ -14,7 +14,7 @@ import { iconSubset } from './icons/icon-subset';
     imports: [RouterOutlet]
 })
 export class AppComponent implements OnInit {
-  title = 'CoreUI Angular Admin Template';
+  title = 'verify-tech-lab';
 
   readonly #destroyRef: DestroyRef = inject(DestroyRef);
   readonly #activatedRoute: ActivatedRoute = inject(ActivatedRoute);
@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
     this.#titleService.setTitle(this.title);
     // iconSet singleton
     this.#iconSetService.icons = { ...iconSubset };
-    this.#colorModeService.localStorageItemName.set('Verify_Tech_Lab-template-theme-default');
+    this.#colorModeService.localStorageItemName.set('verify-tech-lab');
     this.#colorModeService.eventName.set('ColorSchemeChange');
   }
 

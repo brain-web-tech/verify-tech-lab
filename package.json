@@ -1,8 +1,15 @@
 {
   "name": "verify-tech-lab",
   "version": "5.3.4",
-  "copyright": "verify-tech-lab",
-  "homepage": "https://brain-web-tech.github.io/verify-tech-lab/",
+  "copyright": "Copyright 2025 Brain Booster Web Technology",
+  "license": "MIT",
+  "author": "Brain Booster Web Technology",
+  "homepage": "#",
+  "config": {
+    "theme": "default",
+    "coreui_library_short_version": "5.3",
+    "coreui_library_docs_url": ""
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

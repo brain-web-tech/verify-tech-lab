@@ -6,7 +6,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Verify_Tech_Lab-template": {
+    "verify-tech-lab": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -23,7 +23,8 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/Verify_Tech_Lab-template",
+            "baseHref": "/verify-tech-lab/",
+            "outputPath": "dist/verify-tech-lab",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -50,25 +51,30 @@
           },
           "configurations": {
             "production": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "6mb",
-                  "maximumError": "7mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
-                }
-              ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "optimization": {
+               "scripts": true,
+               "styles": {
+                 "minify": true,
+                 "inlineCritical": false
+               },
+               "fonts": true
+              },
+              "sourceMap": false,
+              "namedChunks": false
             },
             "development": {
-              "optimization": false,
+              "optimization": {
+               "scripts": true,
+               "styles": {
+                 "minify": true,
+                 "inlineCritical": false
+               },
+               "fonts": true
+              },
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": false
             }
           },
           "defaultConfiguration": "production"
@@ -77,10 +83,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "Verify_Tech_Lab-template:build:production"
+              "buildTarget": "verify-tech-lab:build:production"
             },
             "development": {
-              "buildTarget": "Verify_Tech_Lab-template:build:development"
+              "buildTarget": "verify-tech-lab:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -88,7 +94,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "Verify_Tech_Lab-template:build"
+            "buildTarget": "verify-tech-lab:build"
           }
         },
         "test": {

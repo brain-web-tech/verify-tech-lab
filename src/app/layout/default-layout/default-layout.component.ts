@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 import { NgScrollbar } from 'ngx-scrollbar';
-
-import { IconDirective } from '@coreui/icons-angular';
 import {
   ContainerComponent,
   ShadowOnScrollDirective,
-  SidebarBrandComponent,
   SidebarComponent,
   SidebarFooterComponent,
   SidebarHeaderComponent,
@@ -15,7 +12,8 @@ import {
   SidebarTogglerDirective
 } from '@coreui/angular';
 
-import { DefaultFooterComponent, DefaultHeaderComponent } from './';
+import { DefaultHeaderComponent } from './default-header/default-header.component';
+import { DefaultFooterComponent } from './default-footer/default-footer.component';
 import { navItems } from './_nav';
 
 function isOverflown(element: HTMLElement) {
@@ -32,9 +30,6 @@ function isOverflown(element: HTMLElement) {
     imports: [
         SidebarComponent,
         SidebarHeaderComponent,
-        SidebarBrandComponent,
-        RouterLink,
-        IconDirective,
         NgScrollbar,
         SidebarNavComponent,
         SidebarFooterComponent,
@@ -51,8 +46,6 @@ export class DefaultLayoutComponent {
   public navItems = navItems;
 
   onScrollbarUpdate($event: any) {
-    // if ($event.verticalUsed) {
-    // console.log('verticalUsed', $event.verticalUsed);
-    // }
+   
   }
 }
