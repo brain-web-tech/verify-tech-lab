@@ -9,8 +9,7 @@ import { ContainerComponent, RowComponent, ColComponent, CardGroupComponent, Tex
     styleUrls: ['./login.component.scss'],
     imports: [ContainerComponent, RowComponent, ColComponent, CardGroupComponent, TextColorDirective, CardComponent, CardBodyComponent, FormDirective, InputGroupComponent, InputGroupTextDirective, IconDirective, FormControlDirective, ButtonDirective, NgStyle]
 })
-export class LoginComponent {
-
+export class LoginComponent {  
+  myImage:string="./assets/images/ImgFile/Wallpaper-login.gif"
   constructor() { }
-
 }
