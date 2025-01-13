@@ -11,7 +11,7 @@
     box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
 
-  @media only screen and (max-width: 1025px) {
+@media only screen and (max-width: 1025px) {
     .bg{
         height: auto;
         width: 100%;
@@ -20,4 +20,4 @@
     .card-group{
         padding-bottom: 50em;
     }
-  }
+}

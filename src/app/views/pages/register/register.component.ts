@@ -9,7 +9,6 @@ import { ContainerComponent, RowComponent, ColComponent, TextColorDirective, Car
     imports: [ContainerComponent, RowComponent, ColComponent, TextColorDirective, CardComponent, CardBodyComponent, FormDirective, InputGroupComponent, InputGroupTextDirective, IconDirective, FormControlDirective, ButtonDirective]
 })
 export class RegisterComponent {
-
+  myImage:string="./assets/images/ImgFile/img2.png"
   constructor() { }
-
 }
