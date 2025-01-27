@@ -1,15 +1,33 @@
-import { Component } from '@angular/core';
 import { NgStyle } from '@angular/common';
 import { IconDirective } from '@coreui/icons-angular';
 import { ContainerComponent, RowComponent, ColComponent, CardGroupComponent, TextColorDirective, CardComponent, CardBodyComponent, FormDirective, InputGroupComponent, InputGroupTextDirective, FormControlDirective, ButtonDirective } from '@coreui/angular';
+
+import { Component, ElementRef, Renderer2 } from '@angular/core';
+import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { Login } from './login';
+import { LoginService } from './login.service';
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
-    imports: [ContainerComponent, RowComponent, ColComponent, CardGroupComponent, TextColorDirective, CardComponent, CardBodyComponent, FormDirective, InputGroupComponent, InputGroupTextDirective, IconDirective, FormControlDirective, ButtonDirective, NgStyle]
+    imports: [ReactiveFormsModule, ContainerComponent, RowComponent, ColComponent, CardGroupComponent, TextColorDirective, CardComponent, CardBodyComponent, FormDirective, InputGroupComponent, InputGroupTextDirective, IconDirective, FormControlDirective, ButtonDirective, NgStyle]
 })
 export class LoginComponent {  
+  userLoginForm: any;
   myImage:string="./assets/images/ImgFile/Wallpaper-login.gif"
-  constructor() { }
+  data : any;
+  constructor(public login:LoginService, private renderer: Renderer2, private el: ElementRef, private formbulider: FormBuilder) {}
+
+  ngOnInit() {
+    this.userLoginForm = this.formbulider.group({
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+    });
+  }
+
+  doLogin(data:any) {
+    const userLogin = this.userLoginForm.value;
+    this.login.login(userLogin);
+  } 
 }
