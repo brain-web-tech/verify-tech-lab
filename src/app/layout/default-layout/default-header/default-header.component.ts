@@ -23,6 +23,9 @@ import {
 } from '@coreui/angular';
 
 import { IconDirective } from '@coreui/icons-angular';
+import { Router } from '@angular/router';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../../authentication/auth.service';
 
 @Component({
     selector: 'app-default-header',
@@ -44,11 +47,10 @@ export class DefaultHeaderComponent extends HeaderComponent {
     const currentMode = this.colorMode();
     return this.colorModes.find(mode => mode.name === currentMode)?.icon ?? 'cilSun';
   });
-
-  constructor() {
+  
+  constructor(private toast: ToastrService, public authService: AuthService, private router: Router) {
     super();
-  }
-
+   }  
   sidebarId = input('sidebar1');
 
   public newMessages = [
@@ -126,4 +128,8 @@ export class DefaultHeaderComponent extends HeaderComponent {
     { id: 4, title: 'Angular Version', value: 100, color: 'success' }
   ];
 
+  logout(){
+    localStorage.setItem("isLoggedIn", "false");
+    this.router.navigateByUrl('/');
+  }
 }

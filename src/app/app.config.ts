@@ -14,6 +14,8 @@ import { IconSetService } from '@coreui/icons-angular';
 import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { CommonModule } from '@angular/common';
+import { provideToastr, ToastrModule, ToastrService } from 'ngx-toastr';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -29,9 +31,20 @@ export const appConfig: ApplicationConfig = {
       withViewTransitions(),
       withHashLocation()
     ),
-    importProvidersFrom(SidebarModule, DropdownModule),
+    importProvidersFrom(
+      SidebarModule,
+      DropdownModule, 
+      CommonModule, 
+      ToastrModule.forRoot({
+        timeOut: 15000, // 15 seconds
+        closeButton: true,
+        progressBar: true,
+      }),
+    ),
     IconSetService,
     provideAnimations(),
-    provideHttpClient(), provideAnimationsAsync()
+    provideHttpClient(), 
+    provideAnimationsAsync(),
+    provideToastr()
   ]
 };

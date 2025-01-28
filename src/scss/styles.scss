@@ -37,5 +37,9 @@ html {
 // We use those styles to show code examples, you should remove them in your application.
 @import "examples";
 
+@import "node_modules/bootstrap-icons/font/bootstrap-icons.css";
+
+@import 'node_modules/ngx-toastr/toastr.css';
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

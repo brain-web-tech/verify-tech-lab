@@ -6,6 +6,7 @@ import { Component, ElementRef, Renderer2 } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { Login } from './login';
 import { LoginService } from './login.service';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-login',
@@ -17,17 +18,18 @@ export class LoginComponent {
   userLoginForm: any;
   myImage:string="./assets/images/ImgFile/Wallpaper-login.gif"
   data : any;
-  constructor(public login:LoginService, private renderer: Renderer2, private el: ElementRef, private formbulider: FormBuilder) {}
-
+  constructor(public login:LoginService, private formbulider: FormBuilder, private toast:ToastrService) {}
+  loginFlag: any;
+  
   ngOnInit() {
     this.userLoginForm = this.formbulider.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required]],
-    });
+    });    
   }
 
   doLogin(data:any) {
     const userLogin = this.userLoginForm.value;
     this.login.login(userLogin);
-  } 
+  }
 }
