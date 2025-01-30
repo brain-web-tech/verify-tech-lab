@@ -25,7 +25,8 @@
                     placeholder="Password"
                     type="password"
                     id="password"
-                    formControlName="password" required
+                    formControlName="password" 
+                    (keydown.enter)="doLogin(userLoginForm.value)"
                   />
                 </c-input-group>
                 <c-row>

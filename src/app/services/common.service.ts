@@ -14,7 +14,6 @@ export class CommonService {
   constructor(private http: HttpClient) { }  
 
   login(userName: string, password: string) {  
-    debugger
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json'}) };  
     return this.http.post(this.url + '/Common/Login/' + '?userName=' +userName + '&password=' + password, httpOptions);  
   }

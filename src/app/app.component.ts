@@ -53,6 +53,5 @@ export class AppComponent implements OnInit, OnDestroy  {
   }
 
   ngOnDestroy(): void {
-    debugger
   }
 }
