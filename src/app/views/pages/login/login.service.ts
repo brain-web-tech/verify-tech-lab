@@ -24,7 +24,7 @@ export class LoginService {
       localStorage.setItem("isLoggedIn", "false");
       if(parseInt(this.data) > 0){
         localStorage.setItem("isLoggedIn", "true");
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl('/dashboard');
       }
       else{
         this.toast.warning('Invalid username or password!', 'Invalid!');

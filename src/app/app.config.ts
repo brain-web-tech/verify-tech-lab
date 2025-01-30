@@ -16,6 +16,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { CommonModule } from '@angular/common';
 import { provideToastr, ToastrModule, ToastrService } from 'ngx-toastr';
+import { RouterModule, Routes } from '@angular/router';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -40,11 +41,12 @@ export const appConfig: ApplicationConfig = {
         closeButton: true,
         progressBar: true,
       }),
+      RouterModule.forRoot(routes, { useHash: false })
     ),
     IconSetService,
     provideAnimations(),
     provideHttpClient(), 
     provideAnimationsAsync(),
-    provideToastr()
+    provideToastr(),
   ]
 };
