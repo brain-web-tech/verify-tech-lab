@@ -27,7 +27,7 @@ export class LoginService {
         this.router.navigateByUrl('/dashboard');
       }
       else{
-        this.toast.warning('Invalid username or password!', 'Invalid!');
+        this.toast.error('Invalid username or password!', 'Invalid!');
       }
     });
   }

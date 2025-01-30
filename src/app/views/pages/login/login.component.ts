@@ -31,6 +31,11 @@ export class LoginComponent {
 
   doLogin(data:any) {
     const userLogin = this.userLoginForm.value;
-    this.login.login(userLogin);
+    if(userLogin.username === '' || userLogin.password === '' ){
+      this.toast.warning('Please enter username or password!', 'required!');
+    }
+    else{
+      this.login.login(userLogin);
+    }
   }
 }
