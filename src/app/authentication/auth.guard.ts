@@ -17,12 +17,9 @@ export class AuthGuard implements CanActivate {
   isLoginFlag:any;
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     this.isLoginFlag = localStorage.getItem("isLoggedIn");
-    if (this.isLoginFlag === 'false') {
-      return this.router.createUrlTree(
-        ['/login']
-      );
-    } else {
-      return true;
-    }
+    if (this.isLoginFlag === null) {
+      return this.router.createUrlTree(['/login']);
+    } 
+    else { return true; }
   }
 }

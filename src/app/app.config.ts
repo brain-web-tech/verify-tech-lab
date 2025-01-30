@@ -29,12 +29,12 @@ export const appConfig: ApplicationConfig = {
       }),
       withEnabledBlockingInitialNavigation(),
       withViewTransitions(),
-      withHashLocation()
+      withHashLocation(),
     ),
     importProvidersFrom(
       SidebarModule,
       DropdownModule, 
-      CommonModule, 
+      CommonModule,
       ToastrModule.forRoot({
         timeOut: 15000, // 15 seconds
         closeButton: true,

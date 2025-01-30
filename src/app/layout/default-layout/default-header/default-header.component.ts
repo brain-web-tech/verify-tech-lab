@@ -129,7 +129,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
   ];
 
   logout(){
-    localStorage.setItem("isLoggedIn", "false");
-    this.router.navigateByUrl('/');
+    localStorage.clear();  // Clear all local storage
+    this.router.navigate(['/login']);
   }
 }

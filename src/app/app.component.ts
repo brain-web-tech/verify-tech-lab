@@ -1,9 +1,8 @@
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, OnDestroy, HostListener  } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { delay, filter, map, tap } from 'rxjs/operators';
-
 import { ColorModeService } from '@coreui/angular';
 import { IconSetService } from '@coreui/icons-angular';
 import { iconSubset } from './icons/icon-subset';
@@ -13,7 +12,7 @@ import { iconSubset } from './icons/icon-subset';
     template: '<router-outlet />',
     imports: [RouterOutlet]
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy  {
   title = 'verify-tech-lab';
 
   readonly #destroyRef: DestroyRef = inject(DestroyRef);
@@ -26,14 +25,13 @@ export class AppComponent implements OnInit {
 
   constructor() {
     this.#titleService.setTitle(this.title);
-    // iconSet singleton
     this.#iconSetService.icons = { ...iconSubset };
     this.#colorModeService.localStorageItemName.set('verify-tech-lab');
     this.#colorModeService.eventName.set('ColorSchemeChange');
+    sessionStorage.setItem('isRefreshed', 'true');
   }
 
   ngOnInit(): void {
-
     this.#router.events.pipe(
         takeUntilDestroyed(this.#destroyRef)
       ).subscribe((evt) => {
@@ -51,7 +49,10 @@ export class AppComponent implements OnInit {
           this.#colorModeService.colorMode.set(theme);
         }),
         takeUntilDestroyed(this.#destroyRef)
-      )
-      .subscribe();
+      ).subscribe();
+  }
+
+  ngOnDestroy(): void {
+    debugger
   }
 }
