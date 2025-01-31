@@ -39,7 +39,7 @@ export class AuthService {
 
   private clearSession() {
     console.log('Session expired. Clearing storage and redirecting...');
-    localStorage.clear();  // Clear all local storage
+    sessionStorage.clear();  // Clear all local storage
     this.router.navigate(['/login']);  // Redirect to login page
   }
 }

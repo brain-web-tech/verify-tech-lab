@@ -21,9 +21,9 @@ export class LoginService {
   login(userLogin:any) {
     this.authService.login(userLogin).subscribe(result => {
       this.data = result.data;
-      localStorage.setItem("isLoggedIn", "false");
+      sessionStorage.removeItem("isLoggedIn");
       if(parseInt(this.data) > 0){
-        localStorage.setItem("isLoggedIn", "true");
+        sessionStorage.setItem("isLoggedIn", "true");
         this.router.navigateByUrl('/dashboard');
       }
       else{

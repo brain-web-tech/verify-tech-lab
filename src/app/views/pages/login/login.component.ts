@@ -22,7 +22,7 @@ export class LoginComponent {
   loginFlag: any;
   
   ngOnInit() {
-    localStorage.setItem("isLoggedIn", "false");
+    sessionStorage.removeItem("isLoggedIn");
     this.userLoginForm = this.formbulider.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required]],

@@ -129,7 +129,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
   ];
 
   logout(){
-    localStorage.clear();  // Clear all local storage
+    sessionStorage.clear();  // Clear all local storage
     this.router.navigate(['/login']);
   }
 }
