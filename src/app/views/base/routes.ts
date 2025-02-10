@@ -3,9 +3,9 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    data: {
-      title: 'Base'
-    },
+    // data: {
+    //   title: 'Bases'
+    // },
     children: [
       {
         path: '',
@@ -13,10 +13,10 @@ export const routes: Routes = [
         pathMatch: 'full'
       },
       {
-        path: 'accordion',
-        loadComponent: () => import('./accordion/accordions.component').then(m => m.AccordionsComponent),
+        path: 'emp-master',
+        loadComponent: () => import('./emp-master/emp-master.component').then(m => m.EmployeeComponent),
         data: {
-          title: 'Accordion'
+          title: 'Employee Master'
         }
       },
       {

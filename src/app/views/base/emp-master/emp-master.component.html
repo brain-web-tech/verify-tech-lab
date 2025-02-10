@@ -1,0 +1,169 @@
+<c-row id="EmployeeMaster" class="d-none">
+  <c-col xs="12">
+    <c-card class="mb-4">
+      <c-card-header ngPreserveWhitespaces>
+        <strong>
+            <span id="AddUpdateEmployee"></span>
+        </strong>
+      </c-card-header>
+      <c-card-body>
+          <form cForm #customStylesForm="ngForm" (ngSubmit)="CreateEmployee(employeeForm.value)" [formGroup]="employeeForm" [validated]="customStylesValidated" class="row g-3 needs-validation">
+            <c-col md="3">
+              <label cLabel for="EmployeeName">Name</label>
+              <input cFormControl id="EmployeeName"  type="text" formControlName="Employee_Name" placeholder="Employee Name" (change)="onName()" required/>
+              <c-form-feedback [valid]="false">required...</c-form-feedback>
+            </c-col>
+            <c-col md="3">
+              <label cLabel for="MobileNumber">Mobile</label>
+              <input cFormControl id="MobileNumber"  type="text" formControlName="Phone" placeholder="+91-9090909090" (change)="onMobile()" maxlength="10" required/>
+              <c-form-feedback [valid]="false">required...</c-form-feedback>
+            </c-col>
+            <c-col md="3">
+              <label cLabel for="EmailId">Email</label>
+              <input cFormControl id="EmailId"  type="text" formControlName="Email" (change)="OnEmail()" placeholder="lime@gmail.com" required/>
+              <c-form-feedback [valid]="false">required...</c-form-feedback>
+            </c-col>
+            <c-col md="3">
+              <label cLabel for="Gender">Gender</label>
+              <select cSelect id="Gender" formControlName="Gender" required>
+                <option value="">Select</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+              <c-form-feedback [valid]="false">required...</c-form-feedback>
+            </c-col>
+            <c-col md="3">
+              <label cLabel for="Designation">Designation</label>
+              <select cSelect id="Designation" formControlName="Designation" required>
+                <option value="">Select</option>
+                <option value="1">Desig 1</option>
+                <option value="2">Desig 2</option>
+              </select>
+              <c-form-feedback [valid]="false">required...</c-form-feedback>
+            </c-col>
+            <c-col md="3">
+              <label cLabel for="Department">Department</label>
+              <select cSelect id="Department" formControlName="Department" required>
+                <option value="">Select</option>
+                <option value="1">Dept 1</option>
+                <option value="2">Dept 2</option>
+              </select>
+              <c-form-feedback [valid]="false">required...</c-form-feedback>
+            </c-col>
+            <c-col md="3">
+              <label cLabel for="Branch">Branch</label>
+              <select cSelect id="Branch" formControlName="Branch_Name" required>
+                <option value="">Select</option>
+                <option value="1">Branch 1</option>
+                <option value="2">Branch 2</option>
+              </select>
+              <c-form-feedback [valid]="false">required...</c-form-feedback>
+            </c-col>
+            <c-col md="3">
+              <label cLabel for="Company">Company</label>
+              <select cSelect id="Company" formControlName="Company_Name" required>
+                <option value="">Select</option>
+                <option value="1">Company 1</option>
+                <option value="2">Company 2</option>
+              </select>
+              <c-form-feedback [valid]="false">required...</c-form-feedback>
+            </c-col>
+            <c-col md="3">
+              <label cLabel for="validationCustomUsername">Username</label>
+              <c-input-group class="has-validation">
+                <span cInputGroupText id="inputGroupPrepend" class="fa fa-user"></span>
+                <input cFormControl formControlName="UserName" type="text" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required/>
+                <c-form-feedback [valid]="false">required...</c-form-feedback>
+              </c-input-group>
+            </c-col>
+            <c-col md="3">
+              <label cLabel for="Password">Password</label>
+              <c-input-group class="has-validation">
+                <span cInputGroupText id="inputGroupPrepend" class="fa fa-eye"></span>
+                <input cFormControl formControlName="Password" type="password" id="Password" aria-describedby="inputGroupPrepend" required/>
+                <c-form-feedback [valid]="false">required...</c-form-feedback>
+              </c-input-group>
+            </c-col>
+            <c-col xs="12">
+              <c-form-check>
+                <input cFormCheckInput id="invalidCheck" name="invalidCheck" required type="checkbox" />
+                <label cFormCheckLabel for="invalidCheck">Agree to terms and conditions</label>
+              </c-form-check>
+              <c-form-feedback [valid]="false">You must agree before submitting.</c-form-feedback>
+            </c-col>
+            <c-col xs="12">
+              <button cButton class="me-1" color="primary" type="submit">
+                Submit form
+              </button>
+              <button (click)="onReset()" cButton color="secondary" type="reset">
+                Reset
+              </button>
+            </c-col>
+          </form>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>
+
+<c-row ngPreserveWhitespaces id="EmployeeList">
+  <c-col xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        <div class="row">
+          <div class="col-sm-6 col-xs-6 col-6 ">
+          <b>
+              <i class="fa fa-table" aria-hidden="true"></i>
+              Employee Master
+          </b>
+          </div>
+      </div>
+      </c-card-header>
+      <c-card-body>
+        <div class="row pb-2">                
+          <div class="col-sm-4">
+            <div class="input-group">
+              <input class="form-control" (ngModel)="SearchText" (keyup.enter)="onSearch()" placeholder="Search..." id="SearchText"/>     
+              <span class="input-group-text">
+                  <i class="fa fa-search"></i>
+              </span>
+            </div>
+          </div>
+          <div class="col-sm-8 text-end">
+            <button type="button" class="btn btn-primary" (click)="AddEmployee()">
+              <i class="fa fa-plus" aria-hidden="true"></i> Add New
+            </button>
+          </div>
+      </div>
+        <table [hover]="true" cTable>
+          <thead class="table-secondary">
+            <tr>
+              <th (click)="onSort('Employee_Name')">Name</th>
+              <th (click)="onSort('Code')">Code</th>
+              <th (click)="onSort('Company_Name')">Company Name</th>
+              <th (click)="onSort('Branch_Name')">Branch Name</th>
+              <th (click)="onSort('Department')">Department</th>
+              <th (click)="onSort('Designation')">Designation</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+          @for (employee of employeeList; track employee.emp_Id) {
+            <tr>
+              <td>{{ employee.employee_Name }}</td>
+              <td>{{ employee.code }}</td>
+              <td>{{ employee.company_Name }}</td>
+              <td>{{ employee.branch_Name }}</td>
+              <td>{{ employee.department }}</td>
+              <td>{{ employee.designation }}</td>
+              <td class="tbl2">  
+                <span class="fa fa-pencil" matTooltip="Click Edit Button"(click)="loadEmployeeToEdit(employee.emp_Id)"></span>  
+                | <span class="fa fa-trash" matTooltip="Click Delete Button"(click)="deleteEmployee(employee.emp_Id)"></span>  
+              </td>  
+            </tr>
+          }
+          </tbody>
+        </table>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>

@@ -22,6 +22,10 @@ export class LoginComponent {
   loginFlag: any;
   
   ngOnInit() {
+    const username = document.getElementById('username') as HTMLInputElement;
+    if (username) {
+      username.focus();
+    }
     sessionStorage.removeItem("isLoggedIn");
     this.userLoginForm = this.formbulider.group({
       username: ['', [Validators.required]],
@@ -32,7 +36,7 @@ export class LoginComponent {
   doLogin(data:any) {
     const userLogin = this.userLoginForm.value;
     if(userLogin.username === '' || userLogin.password === '' ){
-      this.toast.warning('Please enter username or password!', 'required!');
+      this.toast.warning('Please enter username or password!', 'Required!');
     }
     else{
       this.login.login(userLogin);

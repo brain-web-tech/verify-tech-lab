@@ -17,7 +17,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { CommonModule } from '@angular/common';
 import { provideToastr, ToastrModule, ToastrService } from 'ngx-toastr';
 import { RouterModule, Routes } from '@angular/router';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes,
@@ -41,7 +41,8 @@ export const appConfig: ApplicationConfig = {
         closeButton: true,
         progressBar: true,
       }),
-      RouterModule.forRoot(routes, { useHash: false })
+      RouterModule.forRoot(routes, { useHash: false }),
+      FontAwesomeModule
     ),
     IconSetService,
     provideAnimations(),

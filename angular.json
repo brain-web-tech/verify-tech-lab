@@ -40,9 +40,12 @@
               "src/assets"
             ],
             "styles": [
-              "src/scss/styles.scss"
+              "src/scss/styles.scss",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "node_modules/@fortawesome/fontawesome-svg-core/index.js"
+            ],
             "allowedCommonJsDependencies": [],
             "stylePreprocessorOptions": {
               "sass": {
@@ -113,9 +116,12 @@
               "src/assets"
             ],
             "styles": [
-              "src/scss/styles.scss"
+              "src/scss/styles.scss",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/@fortawesome/fontawesome-svg-core/index.js"
+            ]
           }
         }
       }

@@ -5,21 +5,6 @@
         <strong>Validation</strong> <small>Custom styles</small>
       </c-card-header>
       <c-card-body>
-        <p class="text-body-secondary small">
-          For custom CoreUI form validation messages, you&#39;ll need to add the
-          <code>noValidate</code> boolean property to your <code>&lt;CForm&gt;</code>. This
-          disables the browser default feedback tooltips, but still provides access to the form
-          validation APIs in JavaScript. Try to submit the form below; our JavaScript will
-          intercept the submit button and relay feedback to you. When attempting to submit,
-          you&#39;ll see the <code>:invalid</code> and <code>:valid</code> styles applied to
-          your form controls.
-        </p>
-        <p class="text-body-secondary small">
-          Custom feedback styles apply custom colors, borders, focus styles, and background
-          icons to better communicate feedback.
-        </p>
-        <app-docs-example href="forms/validation">
-
           <form #customStylesForm="ngForm"
                 (ngSubmit)="onSubmit1()"
                 [validated]="customStylesValidated"
@@ -83,7 +68,6 @@
               </button>
             </c-col>
           </form>
-        </app-docs-example>
       </c-card-body>
     </c-card>
   </c-col>

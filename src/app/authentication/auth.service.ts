@@ -11,7 +11,7 @@ export class AuthService {
   isLoggedIn = false;
   userName : any;
   password : any;
-  private url: any = 'https://localhost:44375/Api';
+  private url: any = 'https://localhost:50001/Api';
   data : any;
   private sessionTimeout = 30 * 60 * 1000; // 10 minutes
   private timeoutId: any;

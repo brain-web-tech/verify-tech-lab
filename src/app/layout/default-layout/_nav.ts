@@ -26,17 +26,17 @@ export const navItems: INavData[] = [
     iconComponent: { name: 'cil-pencil' }
   },
   {
-    name: 'Components',
+    name: 'Admin',
     title: true
   },
   {
-    name: 'Base',
+    name: 'Tool Customization',
     url: '/base',
-    iconComponent: { name: 'cil-puzzle' },
+    iconComponent: { name: 'cil-settings' },
     children: [
       {
-        name: 'Accordion',
-        url: '/base/accordion',
+        name: 'Employee Master',
+        url: '/base/emp-master',
         icon: 'nav-icon-bullet'
       },
       {

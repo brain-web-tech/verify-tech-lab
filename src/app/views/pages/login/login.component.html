@@ -14,6 +14,7 @@
                     <svg cIcon name="cilUser"></svg>
                   </span>
                   <input formControlName="username" autoComplete="username" cFormControl placeholder="Username" id="username" required/>
+                  <span ngIf="!employeeForm.get('username').value && employeeForm.get('username').touched"></span>
                 </c-input-group>
                 <c-input-group class="mb-4">
                   <span cInputGroupText>
@@ -28,10 +29,11 @@
                     formControlName="password" 
                     (keydown.enter)="doLogin(userLoginForm.value)"
                   />
+                  <span ngIf="!employeeForm.get('password').value && employeeForm.get('password').touched"></span>  
                 </c-input-group>
                 <c-row>
                   <c-col xs="6">
-                    <button cButton class="px-4" color="primary"  (click)="doLogin(userLoginForm.value)">
+                    <button cButton class="px-4" type="submit" mat-raised-button color="primary"  matTooltip="Click Submit Button" [disabled]="!userLoginForm.valid">
                       Login
                     </button>
                   </c-col>
