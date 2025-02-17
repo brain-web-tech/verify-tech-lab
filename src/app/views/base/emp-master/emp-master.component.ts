@@ -9,9 +9,8 @@ import { EmployeeModel } from '../../../services/employee/employee';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ValidationComponent } from '../../../views/forms/validation/validation.component';
-import { Router } from '@angular/router';
-import { DocsExampleComponent } from '@docs-components/public-api';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2'
 
 @Component({
     selector: 'app-emp-master',
@@ -42,6 +41,7 @@ export class EmployeeComponent implements OnInit {
   customStylesValidated = false;
   browserDefaultsValidated = false;
   tooltipValidated = false;
+  toastMessage : any;
 
   constructor(
     private service: EmployeeService,
@@ -108,62 +108,161 @@ export class EmployeeComponent implements OnInit {
   }
 
   loadEmployeeToEdit(employeeId: string) {
-    this.service.getEmployeeById(employeeId).subscribe(employee => {
-      this.massage = null;
-      this.dataSaved = false;
-      this.employeeIdUpdate = employee.emp_Id;
-      this.employeeForm.controls['Employee_Name'].setValue(employee.employee_Name);
-      this.employeeForm.controls['Code'].setValue(employee.code);
-      this.employeeForm.controls['Company_Name'].setValue(employee.company_Name);
-      this.employeeForm.controls['Branch_Name'].setValue(employee.branch_Name);
-      this.employeeForm.controls['Department'].setValue(employee.department);
-      this.employeeForm.controls['Designation'].setValue(employee.designation);
-      this.employeeForm.controls['UserName'].setValue(employee.UserName);
-      this.employeeForm.controls['Password'].setValue(employee.Password);
-      this.employeeForm.controls['Email'].setValue(employee.Email);
-      this.employeeForm.controls['Phone'].setValue(employee.Phone);
-      this.employeeForm.controls['Gender'].setValue(employee.Gender);
-      //this.imageSrc = employee.FilePath;
+    this.service.getEmployeeById(employeeId).subscribe({
+      next: (result) => {
+        this.data = result;
+        if (result.status == 'success') {
+          const AddUpdateEmployee = document.getElementById('AddUpdateEmployee') as HTMLInputElement;
+          AddUpdateEmployee.innerText = "Edit Employee";
+          const EmployeeMaster = document.getElementById('EmployeeMaster') as HTMLInputElement;
+          EmployeeMaster.classList.remove('d-none');
+          const EmployeeList = document.getElementById('EmployeeList') as HTMLInputElement;
+          EmployeeList.classList.add('d-none');
+
+          this.massage = null;
+          this.dataSaved = false;
+          this.employeeIdUpdate = result.data.emp_Id;
+          this.employeeForm.controls['Employee_Name'].setValue(result.data.employee_Name);
+          this.employeeForm.controls['Phone'].setValue(result.data.phone);
+          this.employeeForm.controls['Email'].setValue(result.data.email);
+          this.employeeForm.controls['Gender'].setValue(result.data.gender);
+          this.employeeForm.controls['Designation'].setValue(result.data.designation);
+          this.employeeForm.controls['Department'].setValue(result.data.department);
+          this.employeeForm.controls['Branch_Name'].setValue(result.data.branch_Name);
+          this.employeeForm.controls['Company_Name'].setValue(result.data.company_Name);
+
+          const colUserName = document.getElementById('colUserName') as HTMLInputElement;
+          colUserName.classList.add('d-none');
+          const colPassword = document.getElementById('colPassword') as HTMLInputElement;
+          colPassword.classList.add('d-none');
+
+          this.customStylesValidated = true;
+
+          const AddEditIcon = document.getElementById('AddEditIcon') as HTMLInputElement;
+          AddEditIcon.classList.add('fa-pencil');
+          AddEditIcon.classList.remove('fa-plus-circle');
+        }
+        else{
+          this.toast.error('Something went wrong! Please try again.', 'Error!', {
+            timeOut: 5000,
+            progressBar: true
+          });
+        }
+      },
+      error: (err) => {
+        this.toast.error('Something went wrong! Please try again.', 'Error!', {
+          timeOut: 5000,
+          progressBar: true
+        });
+      }
     });
   }
 
   deleteEmployee(employeeId: string) {
-    if (confirm("Are you sure you want to delete this ?")) {
-      this.service.deleteEmployeeById(employeeId).subscribe(() => {
-        this.dataSaved = true;
-        this.massage = 'Record Deleted Succefully';
-        this.loadEmployee();
-        this.employeeIdUpdate = null;
-        this.employeeForm.reset();
-        setTimeout(() => { this.massage = ''; }, 1000);
-      });
-    }
+    Swal.fire({
+      title: 'Are you sure want to remove?',
+      text: 'You will not be able to recover this file!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it'
+    }).then((result) => {
+      if (result.value) {
+        this.service.deleteEmployeeById(employeeId).subscribe(() => {
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Record Deleted Successfully',
+            showConfirmButton: false,
+            timer: 1500
+          });        
+          this.loadEmployee();
+          this.employeeIdUpdate = null;
+          this.employeeForm.reset();
+        });
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelled',
+          'Your file is safe :)',
+          'error'
+        )
+      }
+    })
   }
 
   AddEmployee(){
+    const reset = document.getElementById('reset') as HTMLButtonElement;
+    if (reset) {
+      reset.click();
+    }
     const EmployeeMaster = document.getElementById('EmployeeMaster') as HTMLInputElement;
-    if (EmployeeMaster) {
-      EmployeeMaster.classList.remove('d-none');
-    }
-
+    EmployeeMaster.classList.remove('d-none');
     const EmployeeList = document.getElementById('EmployeeList') as HTMLInputElement;
-    if (EmployeeList) {
-      EmployeeList.classList.add('d-none');
-    }
-
+    EmployeeList.classList.add('d-none');
     const AddUpdateEmployee = document.getElementById('AddUpdateEmployee') as HTMLInputElement;
-    if (AddUpdateEmployee) {
-      AddUpdateEmployee.innerText = "Create Employee";
-    }
+    AddUpdateEmployee.innerText = "Create Employee";
+    const colUserName = document.getElementById('colUserName') as HTMLInputElement;
+    colUserName.classList.remove('d-none');
+    const colPassword = document.getElementById('colPassword') as HTMLInputElement;
+    colPassword.classList.remove('d-none');
+
+
+    const AddEditIcon = document.getElementById('AddEditIcon') as HTMLInputElement;
+    AddEditIcon.classList.add('fa-plus-circle');
+    AddEditIcon.classList.remove('fa-pencil');
+    this.employeeIdUpdate = null;
   }
 
   CreateEmployee(data:any){
-    this.customStylesValidated = true;
-    if(data.Branch_Name === '' || data.Company_Name === '' || data.Department === '' || data.Designation === '' || data.Email === '' || data.Employee_Name === '' || data.Gender === '' || data.Password === '' || data.Phone === '' || data.UserName === ''){
-      return
+    if(this.employeeIdUpdate != '' && this.employeeIdUpdate != null){
+      data.Password = '0';
+      data.UserName = '0'
+      data.emp_Id = this.employeeIdUpdate;
+      this.toastMessage = "Successfully updated";
     }
     else{
-      this.toast.success('success!', 'success!');
+      this.toastMessage = "Successfully created";
+    }
+    this.customStylesValidated = true;
+    if(data.Branch_Name === null || data.Branch_Name === '' || data.Company_Name === '' || data.Department === '' || data.Designation === '' || data.Email === '' || data.Employee_Name === '' || data.Gender === '' || data.Phone === '' || data.Password === '' || data.UserName === ''){
+      this.toast.warning('Please fill required field!', 'Required!', {
+        timeOut: 5000,
+        closeButton: true,
+        progressBar: true        
+      });
+    }
+    else{
+      this.service.createEmployee(data).subscribe({
+        next: (result) => {
+          this.data = result.data;
+          if (parseInt(this.data) > 0) {
+            this.loadEmployee();
+            const EmployeeMaster = document.getElementById('EmployeeMaster') as HTMLInputElement;
+            if (EmployeeMaster) {
+              EmployeeMaster.classList.add('d-none');
+            }
+            const EmployeeList = document.getElementById('EmployeeList') as HTMLInputElement;
+            if (EmployeeList) {
+              EmployeeList.classList.remove('d-none');
+            }
+            this.toast.success(this.toastMessage, 'success!', {
+              timeOut: 5000, closeButton: true, progressBar: true
+            });
+          }
+          else{
+            this.toast.error('Something went wrong! Please try again.', 'Error!', {
+              timeOut: 5000,
+              progressBar: true
+            });
+          }
+        },
+        error: (err) => {
+          this.toast.error('Something went wrong! Please try again.', 'Error!', {
+            timeOut: 5000,
+            progressBar: true
+          });
+        }
+      });
     }
   }
 
@@ -207,4 +306,10 @@ export class EmployeeComponent implements OnInit {
     }
   }
   
+  BackToList(){
+    const EmployeeMaster = document.getElementById('EmployeeMaster') as HTMLInputElement;
+    EmployeeMaster.classList.add('d-none');
+    const EmployeeList = document.getElementById('EmployeeList') as HTMLInputElement;
+    EmployeeList.classList.remove('d-none');
+  }
 }

@@ -9,20 +9,19 @@ import { EmployeeModel } from './employee';
 })
 
 export class EmployeeService {  
-  private url: string = 'https://localhost:50001/Api';
+  private url: string = 'https://localhost:50001/Api/Employee';
   constructor(private http: HttpClient) { }  
 
   getEmployeeById(EmpId: string): Observable<EmployeeModel> {  
-    return this.http.get<EmployeeModel>(this.url + '/GetEmaployeeById/' + EmpId);  
+    return this.http.get<EmployeeModel>(`${this.url}/GetEmployeeById?id=${EmpId}`);
   } 
 
-  createEmployee(employee: EmployeeModel): Observable<EmployeeModel> {
-    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json'}) };  
-    return this.http.post<EmployeeModel>(this.url + '/InsertEmployeeDetails/', employee, httpOptions);  
+  createEmployee(employee: any): Observable<any> {
+    return this.http.post(this.url + '/CreateEmployee/', employee);
   }  
 
   getEmployees(employee:any): Observable<any> {
-    return this.http.post(this.url+ '/Employee/GetEmployeesList/', employee);
+    return this.http.post(this.url+ '/GetEmployeesList/', employee);
   }
 
   updateEmployee(employee: EmployeeModel): Observable<EmployeeModel> {
@@ -30,9 +29,9 @@ export class EmployeeService {
     return this.http.put<EmployeeModel>(this.url + '/UpdateEmployeeDetails/', employee, httpOptions);  
   }  
 
-  deleteEmployeeById(EmpId: string): Observable<number> {  
+  deleteEmployeeById(EmpId: string): Observable<number> { 
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json'}) };  
-    return this.http.delete<number>(this.url + '/DeleteEmployeeDetailsById?id=' +EmpId, httpOptions);  
+    return this.http.delete<number>(this.url + '/DeleteEmployeeById?id=' + EmpId, httpOptions);  
   }  
 
   public downloadImage(image: string): Observable < Blob > {  

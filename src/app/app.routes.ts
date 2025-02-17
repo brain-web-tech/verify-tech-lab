@@ -14,7 +14,8 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     runGuardsAndResolvers: 'always',
     data: {
-      title: 'Home'
+      title: 'Home',
+      roles: ['Admin']
     },
     children: [
       {

@@ -1,6 +1,11 @@
 import { INavData } from '@coreui/angular';
 
-export const navItems: INavData[] = [
+export interface CustomNavData extends INavData {
+  roles?: string[]; // Add roles property
+  children?: CustomNavData[]; // Ensure children also support roles
+}
+
+export let navItems: CustomNavData[] = [
   {
     name: 'Dashboard',
     url: '/dashboard',
@@ -37,7 +42,9 @@ export const navItems: INavData[] = [
       {
         name: 'Employee Master',
         url: '/base/emp-master',
-        icon: 'nav-icon-bullet'
+        icon: 'nav-icon-bullet',
+        class: 'd-block',
+        roles: ['Admin']
       },
       {
         name: 'Breadcrumbs',

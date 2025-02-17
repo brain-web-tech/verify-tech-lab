@@ -2,9 +2,19 @@
   <c-col xs="12">
     <c-card class="mb-4">
       <c-card-header ngPreserveWhitespaces>
-        <strong>
-            <span id="AddUpdateEmployee"></span>
-        </strong>
+        <div class="row">                
+          <div class="col-sm-4 pt-2">
+            <strong>
+              <i class="fa" aria-hidden="true" id="AddEditIcon"></i>
+              <span id="AddUpdateEmployee"></span>
+          </strong>
+          </div>
+          <div class="col-sm-8 text-end">
+            <button type="button" class="btn btn-primary" (click)="BackToList()">
+              <i class="fa fa-arrow-left" aria-hidden="true"></i> Back To List
+            </button>
+          </div>
+      </div>
       </c-card-header>
       <c-card-body>
           <form cForm #customStylesForm="ngForm" (ngSubmit)="CreateEmployee(employeeForm.value)" [formGroup]="employeeForm" [validated]="customStylesValidated" class="row g-3 needs-validation">
@@ -27,8 +37,8 @@
               <label cLabel for="Gender">Gender</label>
               <select cSelect id="Gender" formControlName="Gender" required>
                 <option value="">Select</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
+                <option value="1">Male</option>
+                <option value="2">Female</option>
               </select>
               <c-form-feedback [valid]="false">required...</c-form-feedback>
             </c-col>
@@ -36,8 +46,8 @@
               <label cLabel for="Designation">Designation</label>
               <select cSelect id="Designation" formControlName="Designation" required>
                 <option value="">Select</option>
-                <option value="1">Desig 1</option>
-                <option value="2">Desig 2</option>
+                <option value="1">Senior</option>
+                <option value="2">Junior</option>
               </select>
               <c-form-feedback [valid]="false">required...</c-form-feedback>
             </c-col>
@@ -68,7 +78,7 @@
               </select>
               <c-form-feedback [valid]="false">required...</c-form-feedback>
             </c-col>
-            <c-col md="3">
+            <c-col md="3" id="colUserName">
               <label cLabel for="validationCustomUsername">Username</label>
               <c-input-group class="has-validation">
                 <span cInputGroupText id="inputGroupPrepend" class="fa fa-user"></span>
@@ -76,7 +86,7 @@
                 <c-form-feedback [valid]="false">required...</c-form-feedback>
               </c-input-group>
             </c-col>
-            <c-col md="3">
+            <c-col md="3" id="colPassword">
               <label cLabel for="Password">Password</label>
               <c-input-group class="has-validation">
                 <span cInputGroupText id="inputGroupPrepend" class="fa fa-eye"></span>
@@ -95,7 +105,7 @@
               <button cButton class="me-1" color="primary" type="submit">
                 Submit form
               </button>
-              <button (click)="onReset()" cButton color="secondary" type="reset">
+              <button (click)="onReset()" cButton color="secondary" type="reset" id="reset">
                 Reset
               </button>
             </c-col>
@@ -122,7 +132,7 @@
         <div class="row pb-2">                
           <div class="col-sm-4">
             <div class="input-group">
-              <input class="form-control" (ngModel)="SearchText" (keyup.enter)="onSearch()" placeholder="Search..." id="SearchText"/>     
+              <input class="form-control" (ngModel)="SearchText" (keyup)="onSearch()" placeholder="Search..." id="SearchText"/>     
               <span class="input-group-text">
                   <i class="fa fa-search"></i>
               </span>

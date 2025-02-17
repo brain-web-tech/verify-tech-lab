@@ -12,4 +12,6 @@ export class EmployeeModel {
     Email: string | any;
     Phone: string | any;
     Gender: string | any;
+    status:string|any;
+    data:any
 }

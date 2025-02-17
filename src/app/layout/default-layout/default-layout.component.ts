@@ -15,6 +15,7 @@ import {
 import { DefaultHeaderComponent } from './default-header/default-header.component';
 import { DefaultFooterComponent } from './default-footer/default-footer.component';
 import { navItems } from './_nav';
+import { AuthService } from '../../authentication/auth.service'; // Import your AuthService
 
 function isOverflown(element: HTMLElement) {
   return (
@@ -44,8 +45,33 @@ function isOverflown(element: HTMLElement) {
 })
 export class DefaultLayoutComponent {
   public navItems = navItems;
+  menus : any = [];
+  userRole: any;
 
-  onScrollbarUpdate($event: any) {
-   
+  constructor(private authService: AuthService) {
+    this.filterNavItems();
   }
+
+  // User Role Permission Page Show Hide
+  filterNavItems() {
+    this.userRole = sessionStorage.getItem("UserRole");
+    this.menus = navItems;
+    this.menus.forEach((element: { class: string, children?: any[] }) => {
+      if (element.children) {
+        element.children.forEach((child: { class: string, roles: any[], children?: any[] }) => {
+          if(child.roles !== undefined){
+            const isRolePresent = child.roles.includes(this.userRole);
+            if (isRolePresent) {
+              child.class = 'd-block'; // Also show child menus
+            }
+            else{
+              child.class = 'd-none'; // Also hide child menus
+            }
+          }            
+        });
+      }
+      this.navItems.push(element);
+    });    
+  }
+  onScrollbarUpdate($event: any) {}
 }
