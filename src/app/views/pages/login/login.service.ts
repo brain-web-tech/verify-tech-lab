@@ -23,7 +23,6 @@ export class LoginService {
         this.data = result.data;
         sessionStorage.removeItem("isLoggedIn");
         if (this.data != 'Failed') {
-          debugger
           sessionStorage.setItem("UserRole", this.data);
           sessionStorage.setItem("isLoggedIn", "true");
           this.router.navigateByUrl('/dashboard');

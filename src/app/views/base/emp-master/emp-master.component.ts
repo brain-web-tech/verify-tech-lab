@@ -245,7 +245,7 @@ export class EmployeeComponent implements OnInit {
             if (EmployeeList) {
               EmployeeList.classList.remove('d-none');
             }
-            this.toast.success(this.toastMessage, 'success!', {
+            this.toast.success(this.toastMessage, 'Success!', {
               timeOut: 5000, closeButton: true, progressBar: true
             });
           }
