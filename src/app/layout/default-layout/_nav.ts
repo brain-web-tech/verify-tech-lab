@@ -1,11 +1,6 @@
 import { INavData } from '@coreui/angular';
 
-export interface CustomNavData extends INavData {
-  roles?: string[]; // Add roles property
-  children?: CustomNavData[]; // Ensure children also support roles
-}
-
-export let navItems: CustomNavData[] = [
+export let navItems: INavData[] = [
   {
     name: 'Dashboard',
     url: '/dashboard',
@@ -14,21 +9,45 @@ export let navItems: CustomNavData[] = [
       color: 'info',
       text: 'NEW'
     }
+  },{
+    name: 'Material Management',
+    url: '/base/cards',
+    icon: 'fa fa-address-card',
+    class: 'd-block',
+    roles: ['Admin']
   },
   {
-    title: true,
-    name: 'Theme'
+    name: 'Blank Material Management',
+    url: '/base/carousel',
+    icon: 'fa fa-address-book',
+    class: 'd-block',
+    roles: ['Admin']
   },
   {
-    name: 'Colors',
-    url: '/theme/colors',
-    iconComponent: { name: 'cil-drop' }
+    name: 'Assignment',
+    url: '/base/pagination',
+    icon: 'fa fa-bars',
+    class: 'd-block',
+    roles: ['Admin']
+  },{
+    name: 'Tasks',
+    url: '/base/popovers',
+    icon: 'fa fa-tasks',
+    class: 'd-block',
+    roles: ['Admin']
+  },{
+    name: 'Maintanance & Calibration',
+    url: '/base/breadcrumbs',
+    icon: 'fa fa-briefcase',
+    class: 'd-block',
+    roles: ['Admin']
   },
   {
-    name: 'Typography',
-    url: '/theme/typography',
-    linkProps: { fragment: 'headings' },
-    iconComponent: { name: 'cil-pencil' }
+    name: 'Reports',
+    url: '/base/spinners',
+    icon: 'fa fa-file-text',
+    class: 'd-block',
+    roles: ['Admin']
   },
   {
     name: 'Admin',

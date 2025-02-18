@@ -52,7 +52,7 @@ export class DefaultLayoutComponent {
     this.filterNavItems();
   }
 
-  // User Role Permission Page Show Hide
+  // Employee Role Permission Page Show Hide
   filterNavItems() {
     this.userRole = sessionStorage.getItem("UserRole");
     this.menus = navItems;
@@ -70,7 +70,6 @@ export class DefaultLayoutComponent {
           }            
         });
       }
-      this.navItems.push(element);
     });    
   }
   onScrollbarUpdate($event: any) {}
