@@ -56,9 +56,22 @@ export class DefaultLayoutComponent {
   filterNavItems() {
     this.userRole = sessionStorage.getItem("UserRole");
     this.menus = navItems;
-    this.menus.forEach((element: { class: string, children?: any[] }) => {
+    this.menus.forEach((element: { class: string, roles: any[], children?: any[] }) => {
+
+      //Parent Page Role Permission
+      if(element.roles !== undefined){
+        const isRolePresent = element.roles.includes(this.userRole);
+        if (isRolePresent) {
+          element.class = 'd-block'; // Also show child menus
+        }
+        else{
+          element.class = 'd-none'; // Also hide child menus
+        }
+      }
+
+      //Child Page Role Permission
       if (element.children) {
-        element.children.forEach((child: { class: string, roles: any[], children?: any[] }) => {
+        element.children.forEach((child: { class: string, roles: any[] }) => {
           if(child.roles !== undefined){
             const isRolePresent = child.roles.includes(this.userRole);
             if (isRolePresent) {

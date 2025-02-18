@@ -21,6 +21,7 @@ export let navItems: INavData[] = [
     url: '/base/carousel',
     icon: 'fa fa-address-book',
     class: 'd-block',
+    style: 'word-break: break-all;',
     roles: ['Admin']
   },
   {
