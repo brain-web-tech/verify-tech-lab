@@ -36,6 +36,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
 
   readonly #colorModeService = inject(ColorModeService);
   readonly colorMode = this.#colorModeService.colorMode;
+  username: any;
 
   readonly colorModes = [
     { name: 'light', text: 'Light', icon: 'cilSun' },
@@ -131,5 +132,11 @@ export class DefaultHeaderComponent extends HeaderComponent {
   logout(){
     sessionStorage.clear();  // Clear all local storage
     this.router.navigate(['/login']);
+  }
+
+  profile(){
+    this.username = sessionStorage.getItem("UserName");
+    sessionStorage.setItem("isRedirectParam", this.username);
+    this.router.navigate(['/base/emp-master']);
   }
 }

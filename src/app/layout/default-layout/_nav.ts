@@ -11,25 +11,131 @@ export let navItems: INavData[] = [
     }
   },{
     name: 'Material Management',
-    url: '/base/cards',
+    url: '/buttons',
     icon: 'fa fa-address-card',
+    roles: ['Admin'],
     class: 'd-block',
-    roles: ['Admin']
+    children: [
+      {
+        name: 'Buttons',
+        url: '/buttons/buttons',
+        icon: 'nav-icon-bullet',
+        roles: ['Admin'],
+        class: 'd-block',
+      },
+      {
+        name: 'Button groups',
+        url: '/buttons/button-groups',
+        icon: 'nav-icon-bullet',
+        roles: ['Admin'],
+        class: 'd-block',
+      },
+      {
+        name: 'Dropdowns',
+        url: '/buttons/dropdowns',
+        icon: 'nav-icon-bullet',
+        roles: ['Admin'],
+        class: 'd-block',
+      }
+    ]
   },
   {
     name: 'Blank Material Management',
-    url: '/base/carousel',
+    url: '/forms',
     icon: 'fa fa-address-book',
-    class: 'd-block',
-    style: 'word-break: break-all;',
-    roles: ['Admin']
+    roles: ['Admin'],
+    children: [
+      {
+        name: 'Form Control',
+        url: '/forms/form-control',
+        icon: 'nav-icon-bullet',
+        class: 'd-block',
+        roles: ['Admin']
+      },
+      {
+        name: 'Select',
+        url: '/forms/select',
+        icon: 'nav-icon-bullet',
+        class: 'd-block',
+        roles: ['Admin']
+      },
+      {
+        name: 'Checks & Radios',
+        url: '/forms/checks-radios',
+        icon: 'nav-icon-bullet',
+        class: 'd-block',
+        roles: ['Admin']
+      },
+      {
+        name: 'Range',
+        url: '/forms/range',
+        icon: 'nav-icon-bullet',
+        class: 'd-block',
+        roles: ['Admin']
+      },
+      {
+        name: 'Input Group',
+        url: '/forms/input-group',
+        icon: 'nav-icon-bullet',
+        class: 'd-block',
+        roles: ['Admin']
+      },
+      {
+        name: 'Floating Labels',
+        url: '/forms/floating-labels',
+        icon: 'nav-icon-bullet',
+        class: 'd-block',
+        roles: ['Admin']
+      },
+      {
+        name: 'Layout',
+        url: '/forms/layout',
+        icon: 'nav-icon-bullet',
+        class: 'd-block',
+        roles: ['Admin']
+      },
+      {
+        name: 'Validation',
+        url: '/forms/validation',
+        icon: 'nav-icon-bullet',
+        class: 'd-block',
+        roles: ['Admin']
+      }
+    ]
   },
   {
     name: 'Assignment',
-    url: '/base/pagination',
     icon: 'fa fa-bars',
+    url: '/icons',
     class: 'd-block',
-    roles: ['Admin']
+    roles: ['Admin'],
+    children: [
+      {
+        name: 'CoreUI Free',
+        url: '/icons/coreui-icons',
+        icon: 'nav-icon-bullet',
+        badge: {
+          color: 'success',
+          text: 'FREE'
+        },
+        class: 'd-block',
+        roles: ['Admin']
+      },
+      {
+        name: 'CoreUI Flags',
+        url: '/icons/flags',
+        icon: 'nav-icon-bullet',
+        class: 'd-block',
+        roles: ['Admin']
+      },
+      {
+        name: 'CoreUI Brands',
+        url: '/icons/brands',
+        icon: 'nav-icon-bullet',
+        class: 'd-block',
+        roles: ['Admin']
+      }
+    ]
   },{
     name: 'Tasks',
     url: '/base/popovers',
@@ -57,7 +163,7 @@ export let navItems: INavData[] = [
   {
     name: 'Tool Customization',
     url: '/base',
-    iconComponent: { name: 'cil-settings' },
+    icon: 'fa fa-cog',
     children: [
       {
         name: 'Employee Master',
@@ -139,104 +245,9 @@ export let navItems: INavData[] = [
     ]
   },
   {
-    name: 'Buttons',
-    url: '/buttons',
-    iconComponent: { name: 'cil-cursor' },
-    children: [
-      {
-        name: 'Buttons',
-        url: '/buttons/buttons',
-        icon: 'nav-icon-bullet'
-      },
-      {
-        name: 'Button groups',
-        url: '/buttons/button-groups',
-        icon: 'nav-icon-bullet'
-      },
-      {
-        name: 'Dropdowns',
-        url: '/buttons/dropdowns',
-        icon: 'nav-icon-bullet'
-      }
-    ]
-  },
-  {
-    name: 'Forms',
-    url: '/forms',
-    iconComponent: { name: 'cil-notes' },
-    children: [
-      {
-        name: 'Form Control',
-        url: '/forms/form-control',
-        icon: 'nav-icon-bullet'
-      },
-      {
-        name: 'Select',
-        url: '/forms/select',
-        icon: 'nav-icon-bullet'
-      },
-      {
-        name: 'Checks & Radios',
-        url: '/forms/checks-radios',
-        icon: 'nav-icon-bullet'
-      },
-      {
-        name: 'Range',
-        url: '/forms/range',
-        icon: 'nav-icon-bullet'
-      },
-      {
-        name: 'Input Group',
-        url: '/forms/input-group',
-        icon: 'nav-icon-bullet'
-      },
-      {
-        name: 'Floating Labels',
-        url: '/forms/floating-labels',
-        icon: 'nav-icon-bullet'
-      },
-      {
-        name: 'Layout',
-        url: '/forms/layout',
-        icon: 'nav-icon-bullet'
-      },
-      {
-        name: 'Validation',
-        url: '/forms/validation',
-        icon: 'nav-icon-bullet'
-      }
-    ]
-  },
-  {
     name: 'Charts',
     iconComponent: { name: 'cil-chart-pie' },
     url: '/charts'
-  },
-  {
-    name: 'Icons',
-    iconComponent: { name: 'cil-star' },
-    url: '/icons',
-    children: [
-      {
-        name: 'CoreUI Free',
-        url: '/icons/coreui-icons',
-        icon: 'nav-icon-bullet',
-        badge: {
-          color: 'success',
-          text: 'FREE'
-        }
-      },
-      {
-        name: 'CoreUI Flags',
-        url: '/icons/flags',
-        icon: 'nav-icon-bullet'
-      },
-      {
-        name: 'CoreUI Brands',
-        url: '/icons/brands',
-        icon: 'nav-icon-bullet'
-      }
-    ]
   },
   {
     name: 'Notifications',

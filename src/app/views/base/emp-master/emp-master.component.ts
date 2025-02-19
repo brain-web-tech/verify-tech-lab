@@ -47,7 +47,8 @@ export class EmployeeComponent implements OnInit {
     private service: EmployeeService,
     private toast: ToastrService,
     private formbulider: FormBuilder,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -63,7 +64,14 @@ export class EmployeeComponent implements OnInit {
       UserName: ['', [Validators.required]],
       Password: ['', [Validators.required]],
     });
-    this.loadEmployee();
+    
+    const userName = sessionStorage.getItem("isRedirectParam");
+    if(userName !== undefined && userName !== null && userName !== ''){
+      this.UserProfile(userName);
+    }
+    else{
+      this.loadEmployee();
+    }
   }
 
   loadEmployee(): void {
@@ -311,5 +319,58 @@ export class EmployeeComponent implements OnInit {
     EmployeeMaster.classList.add('d-none');
     const EmployeeList = document.getElementById('EmployeeList') as HTMLInputElement;
     EmployeeList.classList.remove('d-none');
+    this.loadEmployee();
+  }
+
+  UserProfile(userName:any){
+    sessionStorage.setItem("isRedirectParam","");
+    this.service.getUserProfileByUserName(userName).subscribe({
+      next: (result) => {
+        this.data = result;
+        if (result.status == 'success') {
+          const AddUpdateEmployee = document.getElementById('AddUpdateEmployee') as HTMLInputElement;
+          AddUpdateEmployee.innerText = "Employee Profile";
+          const EmployeeMaster = document.getElementById('EmployeeMaster') as HTMLInputElement;
+          EmployeeMaster.classList.remove('d-none');
+          const EmployeeList = document.getElementById('EmployeeList') as HTMLInputElement;
+          EmployeeList.classList.add('d-none');
+
+          this.massage = null;
+          this.dataSaved = false;
+          this.employeeIdUpdate = result.data.emp_Id;
+          this.employeeForm.controls['Employee_Name'].setValue(result.data.employee_Name);
+          this.employeeForm.controls['Phone'].setValue(result.data.phone);
+          this.employeeForm.controls['Email'].setValue(result.data.email);
+          this.employeeForm.controls['Gender'].setValue(result.data.gender);
+          this.employeeForm.controls['Designation'].setValue(result.data.designation);
+          this.employeeForm.controls['Department'].setValue(result.data.department);
+          this.employeeForm.controls['Branch_Name'].setValue(result.data.branch_Name);
+          this.employeeForm.controls['Company_Name'].setValue(result.data.company_Name);
+
+          const colUserName = document.getElementById('colUserName') as HTMLInputElement;
+          colUserName.classList.add('d-none');
+          const colPassword = document.getElementById('colPassword') as HTMLInputElement;
+          colPassword.classList.add('d-none');
+
+          this.customStylesValidated = true;
+
+          const AddEditIcon = document.getElementById('AddEditIcon') as HTMLInputElement;
+          AddEditIcon.classList.add('fa-user');
+          AddEditIcon.classList.remove('fa-plus-circle');
+        }
+        else{
+          this.toast.error('Something went wrong! Please try again.', 'Error!', {
+            timeOut: 5000,
+            progressBar: true
+          });
+        }
+      },
+      error: (err) => {
+        this.toast.error('Something went wrong! Please try again.', 'Error!', {
+          timeOut: 5000,
+          progressBar: true
+        });
+      }
+    });
   }
 }
