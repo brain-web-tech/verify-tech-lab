@@ -3,14 +3,14 @@
     <c-card class="mb-4">
       <c-card-header ngPreserveWhitespaces>
         <div class="row">                
-          <div class="col-sm-4 pt-2">
+          <div class="col-sm-4">
             <strong>
               <i class="fa" aria-hidden="true" id="AddEditIcon"></i>
               <span id="AddUpdateEmployee"></span>
           </strong>
           </div>
           <div class="col-sm-8 text-end">
-            <button type="button" class="btn btn-primary" (click)="BackToList()">
+            <button type="button" class="btn btn-primary" (click)="BackToList()" id="btnBackToList">
               <i class="fa fa-arrow-left" aria-hidden="true"></i> Back To List
             </button>
           </div>
@@ -94,7 +94,7 @@
                 <c-form-feedback [valid]="false">required...</c-form-feedback>
               </c-input-group>
             </c-col>
-            <c-col xs="12">
+            <c-col xs="12" id="chkCondition">
               <c-form-check>
                 <input cFormCheckInput id="invalidCheck" name="invalidCheck" required type="checkbox" />
                 <label cFormCheckLabel for="invalidCheck">Agree to terms and conditions</label>
@@ -102,7 +102,7 @@
               <c-form-feedback [valid]="false">You must agree before submitting.</c-form-feedback>
             </c-col>
             <c-col xs="12">
-              <button cButton class="me-1" color="primary" type="submit">
+              <button cButton class="me-1" color="primary" type="submit" id="btnSubmit">
                 Submit form
               </button>
               <button (click)="onReset()" cButton color="secondary" type="reset" id="reset">

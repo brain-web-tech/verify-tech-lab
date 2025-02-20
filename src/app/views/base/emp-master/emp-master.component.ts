@@ -149,6 +149,7 @@ export class EmployeeComponent implements OnInit {
           const AddEditIcon = document.getElementById('AddEditIcon') as HTMLInputElement;
           AddEditIcon.classList.add('fa-pencil');
           AddEditIcon.classList.remove('fa-plus-circle');
+          AddEditIcon.classList.remove('fa-user');
         }
         else{
           this.toast.error('Something went wrong! Please try again.', 'Error!', {
@@ -357,6 +358,24 @@ export class EmployeeComponent implements OnInit {
           const AddEditIcon = document.getElementById('AddEditIcon') as HTMLInputElement;
           AddEditIcon.classList.add('fa-user');
           AddEditIcon.classList.remove('fa-plus-circle');
+
+          const role = sessionStorage.getItem("UserRole");
+          const btnBackToList = document.getElementById('btnBackToList') as HTMLInputElement;
+          const btnSubmit = document.getElementById('btnSubmit') as HTMLInputElement;
+          const reset = document.getElementById('reset') as HTMLInputElement; 
+          const chkCondition = document.getElementById('chkCondition') as HTMLInputElement;
+          if(role === 'User'){
+            btnBackToList.classList.add('d-none');
+            btnSubmit.classList.add('d-none');
+            reset.classList.add('d-none');
+            chkCondition.classList.add('d-none');
+          }
+          else{
+            btnBackToList.classList.remove('d-none');
+            btnSubmit.classList.remove('d-none');
+            reset.classList.remove('d-none');
+            chkCondition.classList.remove('d-none');
+          }
         }
         else{
           this.toast.error('Something went wrong! Please try again.', 'Error!', {
