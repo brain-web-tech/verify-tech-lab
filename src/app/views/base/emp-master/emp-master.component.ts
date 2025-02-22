@@ -392,4 +392,59 @@ export class EmployeeComponent implements OnInit {
       }
     });
   }
+
+  checkExistUser(){
+    const validationCustomUsername = document.getElementById('validationCustomUsername') as HTMLInputElement;
+    if (validationCustomUsername) {
+      let username = validationCustomUsername.value.trim();
+      this.service.checkExistUser(username).subscribe({
+        next: (result) => {
+          if (result.status == 'success' && result.data === 'Yes') {
+            this.toast.warning('This user is already exists.', 'Exists!', {
+              timeOut: 5000,
+              progressBar: true
+            });
+            validationCustomUsername.value = "";
+            validationCustomUsername.focus();
+          }
+          else if( result.data === "No")
+          {
+            Swal.fire({
+              title: 'This Username Is Your Login Username?',
+              text: 'Are You Sure Want To Continue?',
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonText: 'Yes, Continue.',
+              cancelButtonText: 'No, Change it.'
+            }).then((result) => {
+              if (result.value) {
+                
+              } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire(
+                  'Cancelled',
+                  'Please Add New Username :)',
+                  'error'
+                )
+                validationCustomUsername.value = "";
+                validationCustomUsername.focus();
+                this.customStylesValidated = false;
+              }
+            })
+          }
+          else  {
+            this.toast.error('Something went wrong! Please try again.', 'Error!', {
+              timeOut: 5000,
+              progressBar: true
+            });
+          }
+        },
+        error: (err) => {
+          this.toast.error('Something went wrong! Please try again.', 'Error!', {
+            timeOut: 5000,
+            progressBar: true
+          });
+        }
+      });
+    }
+  }
 }

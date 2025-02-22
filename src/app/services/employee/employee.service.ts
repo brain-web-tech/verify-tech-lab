@@ -20,6 +20,10 @@ export class EmployeeService {
     return this.http.get<EmployeeModel>(`${this.url}/GetEmployeeByUserName?userName=${userName}`);
   } 
 
+  checkExistUser(userName: string): Observable<any> { 
+    return this.http.get<any>(`${this.url}/CheckExistUser?userName=${userName}`);
+  }
+
   createEmployee(employee: any): Observable<any> {
     return this.http.post(this.url + '/CreateEmployee/', employee);
   }  

@@ -82,7 +82,7 @@
               <label cLabel for="validationCustomUsername">Username</label>
               <c-input-group class="has-validation">
                 <span cInputGroupText id="inputGroupPrepend" class="fa fa-user"></span>
-                <input cFormControl formControlName="UserName" type="text" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required/>
+                <input cFormControl formControlName="UserName" type="text" id="validationCustomUsername" aria-describedby="inputGroupPrepend" (change)="checkExistUser()" required/>
                 <c-form-feedback [valid]="false">required...</c-form-feedback>
               </c-input-group>
             </c-col>
